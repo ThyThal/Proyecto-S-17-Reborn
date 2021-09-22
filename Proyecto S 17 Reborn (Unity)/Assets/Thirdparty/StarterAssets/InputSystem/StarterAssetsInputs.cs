@@ -12,6 +12,11 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool aim;
+		public bool useSpellUtility;
+		public bool useSpellDefensive;
+		public bool useSpellOffensive;
+		public bool attacking;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -38,6 +43,7 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
+			Debug.Log("0");
 			JumpInput(value.isPressed);
 		}
 
@@ -45,6 +51,29 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		public void OnAim(InputValue value)
+		{
+			AimInput(value.isPressed);
+		}
+
+		public void OnSpellUtility(InputValue value)
+		{
+			SpellUtilityInput(value.isPressed);
+		}
+		public void OnSpellDefensive(InputValue value)
+		{
+			SpellDefensiveInput(value.isPressed);
+		}
+		public void OnSpellOffensive(InputValue value)
+		{
+			SpellOffensiveInput(value.isPressed);
+		}
+
+		public void OnAttack(InputValue value)
+        {
+			AttackInput(value.isPressed);
+        }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -62,6 +91,7 @@ namespace StarterAssets
 
 		public void JumpInput(bool newJumpState)
 		{
+			Debug.Log("1");
 			jump = newJumpState;
 		}
 
@@ -69,6 +99,28 @@ namespace StarterAssets
 		{
 			sprint = newSprintState;
 		}
+
+		public void AimInput(bool newAimState)
+		{
+			aim = newAimState;
+		}
+		public void SpellUtilityInput(bool newSpellState)
+		{
+			useSpellUtility = newSpellState;
+		}
+		public void SpellDefensiveInput(bool newSpellState)
+		{
+			useSpellDefensive = newSpellState;
+		}
+		public void SpellOffensiveInput(bool newSpellState)
+		{
+			useSpellOffensive = newSpellState;
+		}
+
+		public void AttackInput(bool newAttackState)
+        {
+			attacking = newAttackState;
+        }
 
 #if !UNITY_IOS || !UNITY_ANDROID
 

@@ -24,6 +24,7 @@ namespace StarterAssets
 		public float RotationSmoothTime = 0.12f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
+		private float _sensitivity = 1f;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -91,6 +92,19 @@ namespace StarterAssets
 
 		private bool _hasAnimator;
 
+		public float Sensitivity
+        {
+			get
+            {
+				return _sensitivity;
+            }
+
+			private set
+            {
+				_sensitivity = value;
+            }
+        }
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -154,8 +168,8 @@ namespace StarterAssets
 			// if there is an input and camera position is not fixed
 			if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
 			{
-				_cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-				_cinemachineTargetPitch += _input.look.y * Time.deltaTime;
+				_cinemachineTargetYaw += _input.look.x * Time.deltaTime * Sensitivity;
+				_cinemachineTargetPitch += _input.look.y * Time.deltaTime * Sensitivity;
 			}
 
 			// clamp our rotations so our values are limited 360 degrees
@@ -314,5 +328,10 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+
+		public void SetSensitivity(float value)
+        {
+			Sensitivity = value;
+        }
 	}
 }
