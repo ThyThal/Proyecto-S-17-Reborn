@@ -43,7 +43,6 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			Debug.Log("0");
 			JumpInput(value.isPressed);
 		}
 
@@ -91,7 +90,6 @@ namespace StarterAssets
 
 		public void JumpInput(bool newJumpState)
 		{
-			Debug.Log("1");
 			jump = newJumpState;
 		}
 

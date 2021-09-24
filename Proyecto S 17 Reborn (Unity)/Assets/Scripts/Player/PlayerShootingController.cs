@@ -15,6 +15,11 @@ public class PlayerShootingController : MonoBehaviour
     private StarterAssetsInputs _starterAssetsInputs;
     private ThirdPersonController _thirdPersonController;
 
+    [Header("Spell Controller")]
+    [SerializeField] private PlayerSpellMeter _playerSpellMeter;
+    [SerializeField] private int _spellRecoverMinimum = 20;
+    [SerializeField] private int _spellRecoverMaximum = 40;
+
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
@@ -23,15 +28,15 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Update()
     {
+        if (_starterAssetsInputs.attacking)
+        {
+            Attack();
+        }
+
         if (_starterAssetsInputs.aim)
         {
             _aimingCamera.gameObject.SetActive(true);
             _thirdPersonController.SetSensitivity(_aimingSensitivity);
-
-            if (_starterAssetsInputs.attacking)
-            {
-
-            }
         }
 
         else
@@ -43,6 +48,11 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("[Attack] Use Attack");
+        //Debug.Log("[Attack] Use Attack");
+        int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
+        _playerSpellMeter.Current += spellRecoverAmount;
+        //Debug.Log(spellRecoverAmount);
+
+        _starterAssetsInputs.attacking = false;
     }
 }
