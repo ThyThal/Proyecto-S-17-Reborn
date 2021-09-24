@@ -7,6 +7,11 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		[SerializeField] private InputActionReference _movementInput;
+		[SerializeField] private InputActionReference _jumpInput;
+		[SerializeField] private InputActionReference _attackInput;
+		[SerializeField] private InputActionReference _aimInput;
+
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -17,6 +22,7 @@ namespace StarterAssets
 		public bool useSpellDefensive;
 		public bool useSpellOffensive;
 		public bool attacking;
+		public bool cancelSpell;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -73,6 +79,11 @@ namespace StarterAssets
         {
 			AttackInput(value.isPressed);
         }
+
+		public void OnSpellCancel(InputValue value)
+        {
+			SpellCancelInput(value.isPressed);
+        }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -120,6 +131,11 @@ namespace StarterAssets
 			attacking = newAttackState;
         }
 
+		public void SpellCancelInput(bool newSpellState)
+        {
+			cancelSpell = true;
+        }
+
 #if !UNITY_IOS || !UNITY_ANDROID
 
 		private void OnApplicationFocus(bool hasFocus)
@@ -132,8 +148,22 @@ namespace StarterAssets
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 
-#endif
+		public void DisablePlayerActions()
+		{
+			_attackInput.action.Disable();
+			_movementInput.action.Disable();
+			_jumpInput.action.Disable();
+			_aimInput.action.Disable();
+		}
 
+		public void EnablePlayerActions()
+		{
+			_attackInput.action.Enable();
+			_movementInput.action.Enable();
+			_jumpInput.action.Enable();
+			_aimInput.action.Enable();
+		}
+#endif
 	}
-	
 }
+

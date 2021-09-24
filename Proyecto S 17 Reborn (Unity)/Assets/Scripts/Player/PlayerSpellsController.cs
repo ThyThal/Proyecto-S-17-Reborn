@@ -10,6 +10,12 @@ public class PlayerSpellsController : MonoBehaviour
     private StarterAssetsInputs _starterAssetsInputs;
     private ThirdPersonController _thirdPersonController;
 
+    [Header("Spell Prefabs")]
+    [SerializeField] private Transform _spellsHolder;
+    [SerializeField] private GameObject _spellDefensivePrefab;
+    [SerializeField] private GameObject _spellOfensivePrefab;
+    [SerializeField] private GameObject _spellUtilityPrefab;
+
 
     private void Awake()
     {
@@ -34,7 +40,7 @@ public class PlayerSpellsController : MonoBehaviour
                 }
             }
 
-            if (_starterAssetsInputs.useSpellDefensive) // Does not use Aim.
+            if (_starterAssetsInputs.useSpellDefensive && _thirdPersonController.Grounded) // Does not use Aim.
             {
                 UseSpellDefensive();
             }
@@ -46,19 +52,22 @@ public class PlayerSpellsController : MonoBehaviour
 
     private void  UseSpellUtility()
     {
-        Debug.Log("[Spell] Use Utility");
+        //Debug.Log("[Spell] Use Utility!");
         _starterAssetsInputs.useSpellUtility = false;
         _playerSpellMeter.Current = 0;
     }
     private void UseSpellDefensive()
     {
-        Debug.Log("[Spell] Use Defensive");
+        //Debug.Log("[Spell] Use Defensive!");
+        _starterAssetsInputs.aim = false;
         _starterAssetsInputs.useSpellDefensive = false;
+        _starterAssetsInputs.DisablePlayerActions();
+        GameObject spellPrefab = Instantiate(_spellDefensivePrefab, _spellsHolder);
         _playerSpellMeter.Current = 0;
     }
     private void  UseSpellOffensive()
     {
-        Debug.Log("[Spell] Use Offensive");
+        //Debug.Log("[Spell] Use Offensive!");
         _starterAssetsInputs.useSpellOffensive = false;
         _playerSpellMeter.Current = 0;
     }

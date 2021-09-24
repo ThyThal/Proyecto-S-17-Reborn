@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using StarterAssets;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -14,6 +15,8 @@ namespace StarterAssets
 #endif
 	public class ThirdPersonController : MonoBehaviour
 	{
+		[SerializeField] private StarterAssetsInputs _starterAssetsInputs;
+
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 2.0f;
@@ -104,6 +107,8 @@ namespace StarterAssets
 				_sensitivity = value;
             }
         }
+
+		public StarterAssetsInputs PlayerInputs => GetComponent<StarterAssetsInputs>();
 
 		private void Awake()
 		{
