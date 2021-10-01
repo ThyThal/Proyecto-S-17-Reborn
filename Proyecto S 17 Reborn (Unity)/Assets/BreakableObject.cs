@@ -27,7 +27,7 @@ public class BreakableObject : MonoBehaviour
 
     public void UnselectObject()
     {
-        if (_isSelected == true)
+        if (_isSelected == true && _meshRenderer != null)
         {
             _meshRenderer.material = _defaultMaterial;
             _isSelected = false;

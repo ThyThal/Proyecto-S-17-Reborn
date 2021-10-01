@@ -1383,7 +1383,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4631200970248130729}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1619,10 +1619,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0870ac381762c824e9cc5162ce067577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentAimObject: {fileID: 0}
   _normalCamera: {fileID: 0}
   _aimingCamera: {fileID: 0}
+  _aimingLayers:
+    serializedVersion: 2
+    m_Bits: 65
+  _breakableLayers: 0
+  _aimingPoint: {fileID: 0}
   _normalSensitivity: 1
   _aimingSensitivity: 0.3
+  _currentBreakableObject: {fileID: 0}
   _playerSpellMeter: {fileID: 0}
   _spellRecoverMinimum: 20
   _spellRecoverMaximum: 40
@@ -1639,6 +1646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpellMeter: {fileID: 0}
+  _playerShootingController: {fileID: 0}
   _spellsHolder: {fileID: 9009809909398494073}
   _spellDefensivePrefab: {fileID: 100004, guid: 389974917cbdb5f4ab75abc4932cb277, type: 3}
   _spellOfensivePrefab: {fileID: 0}

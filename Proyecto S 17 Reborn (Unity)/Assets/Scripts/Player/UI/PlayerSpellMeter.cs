@@ -12,7 +12,7 @@ public class PlayerSpellMeter : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Image _mask;
-    [SerializeField] private Image _fill;
+    [SerializeField] private Slider _slider;
     [SerializeField] private Color _color;
 
     public int Current
@@ -36,6 +36,6 @@ public class PlayerSpellMeter : MonoBehaviour
         float currentOffset = _current - _minimum;
         float maximumOffset = _maximum - _minimum;
         float fillAmount = currentOffset / maximumOffset;
-        _mask.fillAmount = fillAmount;
+        _slider.value = fillAmount;
     }
 }
