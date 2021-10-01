@@ -87,11 +87,14 @@ public class PlayerSpellsController : MonoBehaviour
     private void  UseSpellUtility()
     {
         //Debug.Log("[Spell] Use Utility!");
-        _starterAssetsInputs.useSpellUtility = false;
-        _playerShootingController.CurrentBreakableObject.DestroyObject();
-        _playerSpellMeter.Current = 0;
-        _utilitySpellCooldown = _utilitySpellOriginalCooldown;
-        _utilityFillUI.StartCooldown();
+        if (_playerShootingController.CurrentBreakableObject != null)
+        {
+            _starterAssetsInputs.useSpellUtility = false;
+            _playerShootingController.CurrentBreakableObject.DestroyObject();
+            _playerSpellMeter.Current = 0;
+            _utilitySpellCooldown = _utilitySpellOriginalCooldown;
+            _utilityFillUI.StartCooldown();
+        }
     }
     private void UseSpellDefensive()
     {
