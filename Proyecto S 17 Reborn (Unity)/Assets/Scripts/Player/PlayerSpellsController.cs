@@ -6,6 +6,7 @@ using StarterAssets;
 public class PlayerSpellsController : MonoBehaviour
 {
     [SerializeField] private PlayerSpellMeter _playerSpellMeter;
+    [SerializeField] private PlayerShootingController _playerShootingController;
 
     private StarterAssetsInputs _starterAssetsInputs;
     private ThirdPersonController _thirdPersonController;
@@ -19,6 +20,7 @@ public class PlayerSpellsController : MonoBehaviour
 
     private void Awake()
     {
+        _playerShootingController = GetComponent<PlayerShootingController>();
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _thirdPersonController = GetComponent<ThirdPersonController>();
     }
@@ -54,6 +56,7 @@ public class PlayerSpellsController : MonoBehaviour
     {
         //Debug.Log("[Spell] Use Utility!");
         _starterAssetsInputs.useSpellUtility = false;
+        _playerShootingController.CurrentBreakableObject.DestroyObject();
         _playerSpellMeter.Current = 0;
     }
     private void UseSpellDefensive()
