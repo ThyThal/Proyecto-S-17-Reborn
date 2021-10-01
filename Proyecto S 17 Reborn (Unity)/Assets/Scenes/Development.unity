@@ -4954,5 +4954,9 @@ PrefabInstance:
       propertyPath: _playerSpellMeter
       value: 
       objectReference: {fileID: 695427197}
+    - target: {fileID: 9009809909627799730, guid: 2a5310390a21ed34a946cf37e7e2c3b0, type: 3}
+      propertyPath: _defensiveSpellPrefab
+      value: 
+      objectReference: {fileID: 100004, guid: 389974917cbdb5f4ab75abc4932cb277, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5310390a21ed34a946cf37e7e2c3b0, type: 3}

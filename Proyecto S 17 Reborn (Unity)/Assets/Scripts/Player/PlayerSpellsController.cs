@@ -134,17 +134,17 @@ public class PlayerSpellsController : MonoBehaviour
         if (_defensiveSpellCooldown > 0)
         {
             _defensiveSpellCooldown -= Time.deltaTime;
-            float currentOffset = _utilitySpellCooldown - 0;
-            float maximumOffset = _utilitySpellOriginalCooldown - 0;
+            float currentOffset = _defensiveSpellCooldown - 0;
+            float maximumOffset = _defensiveSpellOriginalCooldown - 0;
             float fillAmount = currentOffset / maximumOffset;
             _defensiveFillUI.SetCooldown(fillAmount);
         }
 
         if (_offensiveSpellCooldown > 0)
         {
-            _defensiveSpellCooldown -= Time.deltaTime;
-            float currentOffset = _utilitySpellCooldown - 0;
-            float maximumOffset = _utilitySpellOriginalCooldown - 0;
+            _offensiveSpellCooldown -= Time.deltaTime;
+            float currentOffset = _offensiveSpellCooldown - 0;
+            float maximumOffset = _offensiveSpellOriginalCooldown - 0;
             float fillAmount = currentOffset / maximumOffset;
             _offensiveFillUI.SetCooldown(fillAmount);
         }
