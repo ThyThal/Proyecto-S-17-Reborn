@@ -33,6 +33,7 @@ public class SpellShield : MonoBehaviour
     private void CreateShield()
     {
         isProtected = true;
+        _thirdPersonController.EnableShield();
     }
 
     private void ExplodeShield()
@@ -45,6 +46,7 @@ public class SpellShield : MonoBehaviour
 
     private void OnDestroy()
     {
+        _thirdPersonController.DisableShield();
         _thirdPersonController.PlayerInputs.EnablePlayerActions();
     }
 }

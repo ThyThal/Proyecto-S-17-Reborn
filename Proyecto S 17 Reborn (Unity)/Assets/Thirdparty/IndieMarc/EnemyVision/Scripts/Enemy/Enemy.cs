@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using StarterAssets;
 
 namespace IndieMarc.EnemyVision
 {
@@ -620,6 +621,17 @@ namespace IndieMarc.EnemyVision
         public void Die()
         {
             gameObject.SetActive(false);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (other.GetComponent<ThirdPersonController>().IsProtected)
+                {
+                    Die();
+                }
+            }
         }
     }
 

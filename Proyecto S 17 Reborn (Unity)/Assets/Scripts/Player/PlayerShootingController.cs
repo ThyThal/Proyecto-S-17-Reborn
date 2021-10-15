@@ -48,6 +48,7 @@ public class PlayerShootingController : MonoBehaviour
         if (_starterAssetsInputs.attacking)
         {
             Attack();
+            _starterAssetsInputs.attacking = false;
         }
 
         if (_starterAssetsInputs.aim)
@@ -121,8 +122,13 @@ public class PlayerShootingController : MonoBehaviour
         //Debug.Log("[Attack] Use Attack");
         int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
         _playerSpellMeter.Current += spellRecoverAmount;
-        //Debug.Log(spellRecoverAmount);
+        GetComponent<Animator>().SetTrigger("Punch");
+        _starterAssetsInputs.DisablePlayerActions();
 
-        _starterAssetsInputs.attacking = false;
+        var enemies = Physics.OverlapSphere(transform.position, 10f, _enemyLayers);
+        foreach (var item in enemies)
+        {
+            Debug.Log("aaa");
+        }
     }
 }

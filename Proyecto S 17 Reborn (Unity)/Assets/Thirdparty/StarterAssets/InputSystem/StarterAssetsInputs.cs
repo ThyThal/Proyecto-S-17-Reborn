@@ -159,8 +159,8 @@ namespace StarterAssets
 		public void EnablePlayerActions()
 		{
 			_attackInput.action.Enable();
-			//_movementInput.action.Enable();
-			//_jumpInput.action.Enable();
+			_movementInput.action.Enable();
+			_jumpInput.action.Enable();
 			_aimInput.action.Enable();
 		}
 

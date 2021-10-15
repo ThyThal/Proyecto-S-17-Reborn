@@ -94,6 +94,7 @@ namespace StarterAssets
 		private const float _threshold = 0.01f;
 
 		private bool _hasAnimator;
+		private bool _isProtected = false;
 
 		public float Sensitivity
         {
@@ -107,6 +108,7 @@ namespace StarterAssets
 				_sensitivity = value;
             }
         }
+		public bool IsProtected => _isProtected;
 
 		public StarterAssetsInputs PlayerInputs => GetComponent<StarterAssetsInputs>();
 
@@ -338,5 +340,15 @@ namespace StarterAssets
         {
 			Sensitivity = value;
         }
+
+		public void EnableShield()
+        {
+			_isProtected = true;
+        }
+
+		public void DisableShield()
+		{
+			_isProtected = false;
+		}
 	}
 }

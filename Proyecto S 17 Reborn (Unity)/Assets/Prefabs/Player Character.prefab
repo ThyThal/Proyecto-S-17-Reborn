@@ -1370,7 +1370,8 @@ GameObject:
   - component: {fileID: 9009809909627799729}
   - component: {fileID: 9009809909627799730}
   - component: {fileID: 1797847733}
-  m_Layer: 8
+  - component: {fileID: 1727195652}
+  m_Layer: 0
   m_Name: Player Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1458,7 +1459,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 192
   CinemachineCameraTarget: {fileID: 1059277796186024434}
   TopClamp: 70
   BottomClamp: -30
@@ -1625,12 +1626,14 @@ MonoBehaviour:
   _aimingCamera: {fileID: 0}
   _aimingLayers:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 449
   _breakableLayers: 0
+  _enemyLayers: 0
   _aimingPoint: {fileID: 0}
   _normalSensitivity: 1
   _aimingSensitivity: 0.3
   _currentBreakableObject: {fileID: 0}
+  _currentEnemy: {fileID: 0}
   _playerSpellMeter: {fileID: 0}
   _spellRecoverMinimum: 20
   _spellRecoverMaximum: 40
@@ -1656,7 +1659,7 @@ MonoBehaviour:
   _defensiveSpellPrefab: {fileID: 100004, guid: 389974917cbdb5f4ab75abc4932cb277, type: 3}
   _defensiveFillUI: {fileID: 0}
   _defensiveSpellCooldown: 10
-  _offensiveSpellPrefab: {fileID: 0}
+  _offensiveSpellPrefab: {fileID: 1027961053612704122, guid: 1810b4f28f6dd9748b6984837cd3aa7d, type: 3}
   _offensiveFillUI: {fileID: 0}
   _offensiveSpellCooldown: 6
 --- !u!114 &1797847733
@@ -1673,6 +1676,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerShooting: {fileID: 9009809909627799729}
   assetsInputs: {fileID: 9001301001944386773}
+--- !u!114 &1727195652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4631200970248130729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4143bfd55442b47ab8f9e47d8837b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 1
 --- !u!1 &4704402071799499386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,7 +2688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9009809909398494073}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spell VFX Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

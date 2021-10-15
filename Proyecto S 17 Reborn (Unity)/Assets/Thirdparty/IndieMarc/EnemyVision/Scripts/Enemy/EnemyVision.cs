@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using StarterAssets;
 
 namespace IndieMarc.EnemyVision
 {
@@ -263,7 +264,17 @@ namespace IndieMarc.EnemyVision
                 {
                     if (onTouchTarget != null)
                         onTouchTarget.Invoke(character);
+
+                    var playerController = character.GetComponent<ThirdPersonController>();
+                    if (playerController != null && playerController.IsProtected)
+                    {
+                        GetComponent<Enemy>().Die();
+                    }
+
+                    else
+                    {
                         GameOver();
+                    }
                 }
             }
         }

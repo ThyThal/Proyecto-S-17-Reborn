@@ -94,6 +94,7 @@ public class PlayerSpellsController : MonoBehaviour
 
         if (_playerShootingController.CurrentBreakableObject != null)
         {
+            _starterAssetsInputs.aim = false;
             transform.LookAt(_playerShootingController.AimingPoint);
             _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
@@ -107,6 +108,7 @@ public class PlayerSpellsController : MonoBehaviour
 
         else if (_playerShootingController.CurrentEnemy != null)
         {
+            _starterAssetsInputs.aim = false;
             transform.LookAt(_playerShootingController.AimingPoint);
             _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
@@ -135,6 +137,7 @@ public class PlayerSpellsController : MonoBehaviour
         transform.LookAt(_playerShootingController.AimingPoint);
         //Debug.Log("[Spell] Use Offensive!");
         _starterAssetsInputs.useSpellOffensive = false;
+        _starterAssetsInputs.aim = false;
         _playerSpellMeter.Current = 0;
         _offensiveSpellCooldown = _offensiveSpellOriginalCooldown;
         _starterAssetsInputs.StartedCastingSpell();
