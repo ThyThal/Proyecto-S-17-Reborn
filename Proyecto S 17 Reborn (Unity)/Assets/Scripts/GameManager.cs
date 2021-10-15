@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,5 +25,9 @@ public class GameManager : MonoBehaviour
     }
     #endregion // Singleton Instance
 
-
+    public void GameOver()
+    {
+        SceneManager.LoadScene(0);
+        Debug.Log("Game Over!");
+    }
 }

@@ -1369,6 +1369,7 @@ GameObject:
   - component: {fileID: 4631200970248130725}
   - component: {fileID: 9009809909627799729}
   - component: {fileID: 9009809909627799730}
+  - component: {fileID: 1797847733}
   m_Layer: 8
   m_Name: Player Character
   m_TagString: Player
@@ -1457,7 +1458,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 65
   CinemachineCameraTarget: {fileID: 1059277796186024434}
   TopClamp: 70
   BottomClamp: -30
@@ -1647,10 +1648,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSpellMeter: {fileID: 0}
   _playerShootingController: {fileID: 0}
+  _animator: {fileID: 2156846843484967017}
   _spellsHolder: {fileID: 9009809909398494073}
-  _spellDefensivePrefab: {fileID: 100004, guid: 389974917cbdb5f4ab75abc4932cb277, type: 3}
-  _spellOfensivePrefab: {fileID: 0}
-  _spellUtilityPrefab: {fileID: 0}
+  _utilitySpellPrefab: {fileID: 0}
+  _utilityFillUI: {fileID: 0}
+  _utilitySpellCooldown: 3
+  _defensiveSpellPrefab: {fileID: 100004, guid: 389974917cbdb5f4ab75abc4932cb277, type: 3}
+  _defensiveFillUI: {fileID: 0}
+  _defensiveSpellCooldown: 10
+  _offensiveSpellPrefab: {fileID: 0}
+  _offensiveFillUI: {fileID: 0}
+  _offensiveSpellCooldown: 6
+--- !u!114 &1797847733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4631200970248130729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9e3e4f1e978314aade229f1dedd9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShooting: {fileID: 9009809909627799729}
+  assetsInputs: {fileID: 9001301001944386773}
 --- !u!1 &4704402071799499386
 GameObject:
   m_ObjectHideFlags: 0

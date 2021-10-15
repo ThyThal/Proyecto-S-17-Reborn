@@ -8,6 +8,7 @@ public class PlayerSpellsController : MonoBehaviour
 {
     [SerializeField] private PlayerSpellMeter _playerSpellMeter;
     [SerializeField] private PlayerShootingController _playerShootingController;
+    [SerializeField] private Animator _animator;
 
     private StarterAssetsInputs _starterAssetsInputs;
     private ThirdPersonController _thirdPersonController;
@@ -34,6 +35,8 @@ public class PlayerSpellsController : MonoBehaviour
     private float _offensiveSpellOriginalCooldown;
 
     public bool UtilitySpellReady() => _utilitySpellCooldown <= 0 ? true : false;
+    public bool DefensiveSpellReady() => _defensiveSpellCooldown <= 0 ? true : false;
+    public bool OffensiveSpellReady() => _offensiveSpellCooldown <= 0 ? true : false;
 
 
     private void Awake()
@@ -68,13 +71,13 @@ public class PlayerSpellsController : MonoBehaviour
                     UseSpellUtility();
                 }
 
-                if (_starterAssetsInputs.useSpellOffensive)
+                if (_starterAssetsInputs.useSpellOffensive && OffensiveSpellReady())
                 {
                     UseSpellOffensive();
                 }
             }
 
-            if (_starterAssetsInputs.useSpellDefensive && _thirdPersonController.Grounded) // Does not use Aim.
+            if (_starterAssetsInputs.useSpellDefensive && _thirdPersonController.Grounded && DefensiveSpellReady()) // Does not use Aim.
             {
                 UseSpellDefensive();
             }
@@ -94,6 +97,16 @@ public class PlayerSpellsController : MonoBehaviour
             _playerSpellMeter.Current = 0;
             _utilitySpellCooldown = _utilitySpellOriginalCooldown;
             _utilityFillUI.StartCooldown();
+            
+        }
+
+        else if (_playerShootingController.CurrentEnemy != null)
+        {
+            _starterAssetsInputs.useSpellUtility = false;
+            _playerShootingController.CurrentEnemy.TakeDamage(20);
+            _playerSpellMeter.Current = 0;
+            _utilitySpellCooldown = _utilitySpellOriginalCooldown;
+            _utilityFillUI.StartCooldown();
         }
     }
     private void UseSpellDefensive()
@@ -106,14 +119,17 @@ public class PlayerSpellsController : MonoBehaviour
         _playerSpellMeter.Current = 0;
         _defensiveSpellCooldown = _defensiveSpellOriginalCooldown;
         _defensiveFillUI.StartCooldown();
+        _animator.SetTrigger("ActivateShield");
     }
-    private void  UseSpellOffensive()
+    private void UseSpellOffensive()
     {
         //Debug.Log("[Spell] Use Offensive!");
         _starterAssetsInputs.useSpellOffensive = false;
         _playerSpellMeter.Current = 0;
         _offensiveSpellCooldown = _offensiveSpellOriginalCooldown;
         _offensiveFillUI.StartCooldown();
+        GameObject spellPrefab = Instantiate(_offensiveSpellPrefab, _playerShootingController.AimingPoint);
+        spellPrefab.transform.position = _playerShootingController.AimingPoint.transform.position;
     }
 
     private void ResetSpellsInput()

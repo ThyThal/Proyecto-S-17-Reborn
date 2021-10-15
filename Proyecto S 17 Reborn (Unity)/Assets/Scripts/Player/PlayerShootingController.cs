@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using StarterAssets;
+using IndieMarc.EnemyVision;
 
 public class PlayerShootingController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _aimingCamera;
     [SerializeField] private LayerMask _aimingLayers;
     [SerializeField] private int _breakableLayers;
+    [SerializeField] private int _enemyLayers;
+
     [SerializeField] private GameObject _aimingPoint;
 
     [SerializeField] private float _normalSensitivity = 1f;
@@ -20,6 +23,7 @@ public class PlayerShootingController : MonoBehaviour
     private StarterAssetsInputs _starterAssetsInputs;
     private ThirdPersonController _thirdPersonController;
     [SerializeField] private BreakableObject _currentBreakableObject;
+    [SerializeField] private Enemy _currentEnemy;
 
     [Header("Spell Controller")]
     [SerializeField] private PlayerSpellMeter _playerSpellMeter;
@@ -27,12 +31,15 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private int _spellRecoverMaximum = 40;
 
     public BreakableObject CurrentBreakableObject => _currentBreakableObject;
+    public Enemy CurrentEnemy => _currentEnemy;
+    public Transform AimingPoint => _aimingPoint.transform;
 
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _thirdPersonController = GetComponent<ThirdPersonController>();
         _breakableLayers = LayerMask.NameToLayer("Breakable Object");
+        _enemyLayers = LayerMask.NameToLayer("Enemy");
 
     }
 
@@ -66,7 +73,7 @@ public class PlayerShootingController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 1000f, _aimingLayers))
         {
             _currentAimObject = raycastHit.transform.gameObject;
-            //_aimingPoint.transform.position = raycastHit.point;
+            _aimingPoint.transform.position = raycastHit.point;
             if (_starterAssetsInputs.aim == true)
             {
                 if (_currentAimObject.layer == _breakableLayers)
@@ -84,16 +91,26 @@ public class PlayerShootingController : MonoBehaviour
                         if (currentSelectedObject != _currentBreakableObject)
                         {
                             _currentBreakableObject.UnselectObject();
-                            currentSelectedObject.SelectObject();
+                            currentSelectedObject.SelectObject(); // Highlight.
                             _currentBreakableObject = currentSelectedObject;
                         }
                     }
                 }
-
                 else
                 {
                     _currentBreakableObject?.UnselectObject();
                     _currentBreakableObject = null;
+                }
+
+                if (_currentAimObject.layer == _enemyLayers)
+                {
+                    var currentSelectedObject = _currentAimObject.GetComponent<Enemy>();
+                    _currentEnemy = currentSelectedObject;
+                }
+
+                else
+                {
+                    _currentEnemy = null;
                 }
             }
         }

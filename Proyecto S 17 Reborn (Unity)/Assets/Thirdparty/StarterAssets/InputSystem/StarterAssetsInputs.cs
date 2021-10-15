@@ -151,8 +151,8 @@ namespace StarterAssets
 		public void DisablePlayerActions()
 		{
 			_attackInput.action.Disable();
-			//_movementInput.action.Disable();
-			//_jumpInput.action.Disable();
+			_movementInput.action.Disable();
+			_jumpInput.action.Disable();
 			_aimInput.action.Disable();
 		}
 
@@ -161,6 +161,19 @@ namespace StarterAssets
 			_attackInput.action.Enable();
 			//_movementInput.action.Enable();
 			//_jumpInput.action.Enable();
+			_aimInput.action.Enable();
+		}
+
+		public void DisableMovement()
+        {
+			_movementInput.action.Disable();
+		}
+
+		public void FinishedShieldSpell()
+        {
+			_attackInput.action.Enable();
+			_movementInput.action.Enable();
+			_jumpInput.action.Enable();
 			_aimInput.action.Enable();
 		}
 #endif
