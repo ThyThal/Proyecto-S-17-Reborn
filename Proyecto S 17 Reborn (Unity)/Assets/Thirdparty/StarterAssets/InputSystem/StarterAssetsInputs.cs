@@ -169,7 +169,15 @@ namespace StarterAssets
 			_movementInput.action.Disable();
 		}
 
-		public void FinishedShieldSpell()
+		public void StartedCastingSpell()
+        {
+			_attackInput.action.Disable();
+			_movementInput.action.Disable();
+			_jumpInput.action.Disable();
+			_aimInput.action.Disable();
+		}
+
+		public void FinishedCastingSpell()
         {
 			_attackInput.action.Enable();
 			_movementInput.action.Enable();

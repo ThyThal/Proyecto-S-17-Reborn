@@ -7,8 +7,8 @@ public class SpellsAnimationTriggers : MonoBehaviour
 {
     [SerializeField] private PlayerShootingController playerShooting;
     [SerializeField] private StarterAssetsInputs assetsInputs;
-    public void OnSpellShieldFinished()
+    public void OnSpellFinished()
     {
-        assetsInputs.FinishedShieldSpell();
+        assetsInputs.FinishedCastingSpell();
     }
 }

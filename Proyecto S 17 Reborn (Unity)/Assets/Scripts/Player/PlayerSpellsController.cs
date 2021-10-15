@@ -90,31 +90,40 @@ public class PlayerSpellsController : MonoBehaviour
     private void  UseSpellUtility()
     {
         //Debug.Log("[Spell] Use Utility!");
+        
+
         if (_playerShootingController.CurrentBreakableObject != null)
         {
+            transform.LookAt(_playerShootingController.AimingPoint);
+            _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
             _playerShootingController.CurrentBreakableObject.DestroyObject();
             _playerSpellMeter.Current = 0;
             _utilitySpellCooldown = _utilitySpellOriginalCooldown;
             _utilityFillUI.StartCooldown();
-            
+            _animator.SetTrigger("ActivateSingle");
+
         }
 
         else if (_playerShootingController.CurrentEnemy != null)
         {
+            transform.LookAt(_playerShootingController.AimingPoint);
+            _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
             _playerShootingController.CurrentEnemy.TakeDamage(20);
             _playerSpellMeter.Current = 0;
             _utilitySpellCooldown = _utilitySpellOriginalCooldown;
             _utilityFillUI.StartCooldown();
+            _animator.SetTrigger("ActivateSingle");
         }
     }
     private void UseSpellDefensive()
     {
         //Debug.Log("[Spell] Use Defensive!");
+        transform.LookAt(_playerShootingController.AimingPoint);
         _starterAssetsInputs.aim = false;
         _starterAssetsInputs.useSpellDefensive = false;
-        _starterAssetsInputs.DisablePlayerActions();
+        _starterAssetsInputs.StartedCastingSpell();
         GameObject spellPrefab = Instantiate(_defensiveSpellPrefab, _spellsHolder);
         _playerSpellMeter.Current = 0;
         _defensiveSpellCooldown = _defensiveSpellOriginalCooldown;
@@ -123,13 +132,16 @@ public class PlayerSpellsController : MonoBehaviour
     }
     private void UseSpellOffensive()
     {
+        transform.LookAt(_playerShootingController.AimingPoint);
         //Debug.Log("[Spell] Use Offensive!");
         _starterAssetsInputs.useSpellOffensive = false;
         _playerSpellMeter.Current = 0;
         _offensiveSpellCooldown = _offensiveSpellOriginalCooldown;
+        _starterAssetsInputs.StartedCastingSpell();
         _offensiveFillUI.StartCooldown();
         GameObject spellPrefab = Instantiate(_offensiveSpellPrefab, _playerShootingController.AimingPoint);
         spellPrefab.transform.position = _playerShootingController.AimingPoint.transform.position;
+        _animator.SetTrigger("ActivateArea");
     }
 
     private void ResetSpellsInput()
