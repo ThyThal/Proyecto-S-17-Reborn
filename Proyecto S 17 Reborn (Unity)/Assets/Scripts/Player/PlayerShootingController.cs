@@ -130,5 +130,7 @@ public class PlayerShootingController : MonoBehaviour
         {
             Debug.Log("aaa");
         }
+
+        _currentEnemy = null;
     }
 }

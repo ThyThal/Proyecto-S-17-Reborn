@@ -95,7 +95,11 @@ public class PlayerSpellsController : MonoBehaviour
         if (_playerShootingController.CurrentBreakableObject != null)
         {
             _starterAssetsInputs.aim = false;
-            transform.LookAt(_playerShootingController.AimingPoint);
+
+            Vector3 lookPos = _playerShootingController.AimingPoint.transform.position;
+            lookPos.y = transform.position.y;
+            Quaternion.LookRotation(lookPos - transform.position);
+
             _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
             _playerShootingController.CurrentBreakableObject.DestroyObject();
@@ -109,7 +113,11 @@ public class PlayerSpellsController : MonoBehaviour
         else if (_playerShootingController.CurrentEnemy != null)
         {
             _starterAssetsInputs.aim = false;
-            transform.LookAt(_playerShootingController.AimingPoint);
+
+            Vector3 lookPos = _playerShootingController.CurrentEnemy.transform.position;
+            lookPos.y = transform.position.y;
+            Quaternion.LookRotation(lookPos - transform.position);
+
             _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
             _playerShootingController.CurrentEnemy.TakeDamage(20);
@@ -122,7 +130,10 @@ public class PlayerSpellsController : MonoBehaviour
     private void UseSpellDefensive()
     {
         //Debug.Log("[Spell] Use Defensive!");
-        transform.LookAt(_playerShootingController.AimingPoint);
+        Vector3 lookPos = _playerShootingController.AimingPoint.transform.position;
+        lookPos.y = transform.position.y;
+        Quaternion.LookRotation(lookPos - transform.position);
+
         _starterAssetsInputs.aim = false;
         _starterAssetsInputs.useSpellDefensive = false;
         _starterAssetsInputs.StartedCastingSpell();
@@ -134,7 +145,10 @@ public class PlayerSpellsController : MonoBehaviour
     }
     private void UseSpellOffensive()
     {
-        transform.LookAt(_playerShootingController.AimingPoint);
+        Vector3 lookPos = _playerShootingController.AimingPoint.transform.position;
+        lookPos.y = transform.position.y;
+        Quaternion.LookRotation(lookPos - transform.position);
+
         //Debug.Log("[Spell] Use Offensive!");
         _starterAssetsInputs.useSpellOffensive = false;
         _starterAssetsInputs.aim = false;

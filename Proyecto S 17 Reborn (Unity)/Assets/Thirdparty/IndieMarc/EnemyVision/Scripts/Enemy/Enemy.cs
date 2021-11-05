@@ -605,7 +605,6 @@ namespace IndieMarc.EnemyVision
             }
         }
 
-
         // DAMAGE
         public virtual void TakeDamage(float damage)
         {
@@ -633,6 +632,7 @@ namespace IndieMarc.EnemyVision
                 }
             }
         }
+
     }
 
 }
