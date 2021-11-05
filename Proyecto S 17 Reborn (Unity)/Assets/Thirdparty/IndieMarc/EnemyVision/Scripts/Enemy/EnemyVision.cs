@@ -262,7 +262,10 @@ namespace IndieMarc.EnemyVision
                 if (CanTouchObject(character.gameObject))
                 {
                     if (onTouchTarget != null)
+                    {
                         onTouchTarget.Invoke(character);
+                        GameOver();
+                    }
                 }
             }
         }
@@ -482,6 +485,11 @@ namespace IndieMarc.EnemyVision
         public static List<EnemyVision> GetAll()
         {
             return enemy_list;
+        }
+
+        public void GameOver()
+        {
+            GameManager.Instance.GameOver();
         }
     }
 
