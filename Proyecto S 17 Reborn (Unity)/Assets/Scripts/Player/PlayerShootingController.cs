@@ -59,6 +59,8 @@ public class PlayerShootingController : MonoBehaviour
 
         else
         {
+            _starterAssetsInputs.aim = false;
+
             _aimingCamera.gameObject.SetActive(false);
             _thirdPersonController.SetSensitivity(_normalSensitivity);
             if (_currentBreakableObject != null) 
@@ -119,6 +121,12 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Attack()
     {
+        transform.LookAt(AimingPoint.transform);
+        var newRotation = transform.rotation;
+        newRotation.x = 0;
+        newRotation.z = 0;
+        transform.rotation = newRotation;
+
         //Debug.Log("[Attack] Use Attack");
         int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
         _playerSpellMeter.Current += spellRecoverAmount;
@@ -130,7 +138,6 @@ public class PlayerShootingController : MonoBehaviour
         {
             Debug.Log("aaa");
         }
-
-        _currentEnemy = null;
     }
+
 }

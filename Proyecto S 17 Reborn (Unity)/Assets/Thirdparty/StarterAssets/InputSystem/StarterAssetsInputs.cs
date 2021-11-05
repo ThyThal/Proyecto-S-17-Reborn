@@ -153,7 +153,7 @@ namespace StarterAssets
 			_attackInput.action.Disable();
 			_movementInput.action.Disable();
 			_jumpInput.action.Disable();
-			_aimInput.action.Disable();
+			//_aimInput.action.Disable();
 		}
 
 		public void EnablePlayerActions()
@@ -161,12 +161,7 @@ namespace StarterAssets
 			_attackInput.action.Enable();
 			_movementInput.action.Enable();
 			_jumpInput.action.Enable();
-			_aimInput.action.Enable();
-		}
-
-		public void DisableMovement()
-        {
-			_movementInput.action.Disable();
+			//_aimInput.action.Enable();
 		}
 
 		public void StartedCastingSpell()
@@ -174,7 +169,7 @@ namespace StarterAssets
 			_attackInput.action.Disable();
 			_movementInput.action.Disable();
 			_jumpInput.action.Disable();
-			_aimInput.action.Disable();
+			//_aimInput.action.Disable();
 		}
 
 		public void FinishedCastingSpell()
@@ -182,7 +177,7 @@ namespace StarterAssets
 			_attackInput.action.Enable();
 			_movementInput.action.Enable();
 			_jumpInput.action.Enable();
-			_aimInput.action.Enable();
+			//_aimInput.action.Enable();
 		}
 #endif
 	}

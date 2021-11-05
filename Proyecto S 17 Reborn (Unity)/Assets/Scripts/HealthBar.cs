@@ -25,4 +25,10 @@ public class HealthBar : MonoBehaviour
 		fill.color = gradient.Evaluate(slider.normalizedValue);
 	}
 
+    private void LateUpdate()
+    {
+		transform.LookAt(Camera.main.transform);
+		transform.Rotate(0, 180, 0);
+    }
+
 }
