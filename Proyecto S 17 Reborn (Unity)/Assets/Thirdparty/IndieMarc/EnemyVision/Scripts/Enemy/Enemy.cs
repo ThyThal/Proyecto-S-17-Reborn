@@ -619,6 +619,7 @@ namespace IndieMarc.EnemyVision
         }
         public void Die()
         {
+            healthBar.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 
