@@ -60,7 +60,6 @@ public class PlayerSpellsController : MonoBehaviour
     private void Update()
     {
         CheckSpellsCooldown();
-        UpdateSpellsUI();
 
         if (_playerSpellMeter.CanUseSpell == true)
         {
@@ -68,17 +67,20 @@ public class PlayerSpellsController : MonoBehaviour
             {
                 if (_starterAssetsInputs.useSpellUtility && UtilitySpellReady())
                 {
+                    LookAtAiming();
                     UseSpellUtility();
                 }
 
                 if (_starterAssetsInputs.useSpellOffensive && OffensiveSpellReady())
                 {
+                    LookAtAiming();
                     UseSpellOffensive();
                 }
             }
 
             if (_starterAssetsInputs.useSpellDefensive && _thirdPersonController.Grounded && DefensiveSpellReady()) // Does not use Aim.
             {
+                LookAtAiming();
                 UseSpellDefensive();
             }
         }
@@ -94,8 +96,6 @@ public class PlayerSpellsController : MonoBehaviour
 
         if (_playerShootingController.CurrentBreakableObject != null)
         {
-            _starterAssetsInputs.aim = false;
-            transform.LookAt(_playerShootingController.AimingPoint);
             _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
             _playerShootingController.CurrentBreakableObject.DestroyObject();
@@ -108,8 +108,6 @@ public class PlayerSpellsController : MonoBehaviour
 
         else if (_playerShootingController.CurrentEnemy != null)
         {
-            _starterAssetsInputs.aim = false;
-            transform.LookAt(_playerShootingController.AimingPoint);
             _starterAssetsInputs.StartedCastingSpell();
             _starterAssetsInputs.useSpellUtility = false;
             _playerShootingController.CurrentEnemy.TakeDamage(20);
@@ -121,9 +119,6 @@ public class PlayerSpellsController : MonoBehaviour
     }
     private void UseSpellDefensive()
     {
-        //Debug.Log("[Spell] Use Defensive!");
-        transform.LookAt(_playerShootingController.AimingPoint);
-        _starterAssetsInputs.aim = false;
         _starterAssetsInputs.useSpellDefensive = false;
         _starterAssetsInputs.StartedCastingSpell();
         GameObject spellPrefab = Instantiate(_defensiveSpellPrefab, _spellsHolder);
@@ -134,10 +129,8 @@ public class PlayerSpellsController : MonoBehaviour
     }
     private void UseSpellOffensive()
     {
-        transform.LookAt(_playerShootingController.AimingPoint);
         //Debug.Log("[Spell] Use Offensive!");
         _starterAssetsInputs.useSpellOffensive = false;
-        _starterAssetsInputs.aim = false;
         _playerSpellMeter.Current = 0;
         _offensiveSpellCooldown = _offensiveSpellOriginalCooldown;
         _starterAssetsInputs.StartedCastingSpell();
@@ -184,8 +177,12 @@ public class PlayerSpellsController : MonoBehaviour
         }
     }
 
-    private void UpdateSpellsUI()
+    private void LookAtAiming()
     {
-
+        transform.LookAt(_playerShootingController.AimingPoint.transform);
+        var newRotation = transform.rotation;
+        newRotation.x = 0;
+        newRotation.z = 0;
+        transform.rotation = newRotation;
     }
 }

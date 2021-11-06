@@ -605,7 +605,6 @@ namespace IndieMarc.EnemyVision
             }
         }
 
-
         // DAMAGE
         public virtual void TakeDamage(float damage)
         {
@@ -620,6 +619,7 @@ namespace IndieMarc.EnemyVision
         }
         public void Die()
         {
+            healthBar.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 
@@ -633,6 +633,7 @@ namespace IndieMarc.EnemyVision
                 }
             }
         }
+
     }
 
 }

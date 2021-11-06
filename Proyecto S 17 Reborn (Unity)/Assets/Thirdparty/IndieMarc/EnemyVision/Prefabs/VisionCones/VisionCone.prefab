@@ -49,7 +49,7 @@ MonoBehaviour:
   vision_near_range: 3
   obstacle_mask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 256
   show_two_levels: 1
   cone_material: {fileID: 2100000, guid: 110a4a0af7721044faab94478d5ab05c, type: 2}
   cone_far_material: {fileID: 2100000, guid: a45021f2647208144bce8fe9c98f25db, type: 2}
