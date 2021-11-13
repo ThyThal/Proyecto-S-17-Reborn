@@ -94,7 +94,7 @@ namespace StarterAssets
 		private const float _threshold = 0.01f;
 
 		private bool _hasAnimator;
-		private bool _isProtected = false;
+		[SerializeField] private bool _isProtected = false;
 
 		public float Sensitivity
         {
