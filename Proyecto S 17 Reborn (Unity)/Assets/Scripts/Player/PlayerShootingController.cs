@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using StarterAssets;
@@ -133,7 +134,14 @@ public class PlayerShootingController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Punch");
         _starterAssetsInputs.DisablePlayerActions();
 
-        var enemies = Physics.OverlapSphere(transform.position, 10f);
+        var enemies = Physics.OverlapSphere(transform.position, 1.5f);
+        var enemy = enemies.FirstOrDefault(x => x.gameObject.layer == _enemyLayers);
+        if (enemy != null) {
+            Debug.Log("dsafasfsa");
+            enemy.gameObject.GetComponent<Enemy>()?.TakeDamage(10);
+        };
+
+        /*
         foreach (var item in enemies)
         {
             if (item.gameObject.layer == _enemyLayers)
@@ -141,7 +149,7 @@ public class PlayerShootingController : MonoBehaviour
                 Debug.Log("AAAA");
                 item.GetComponent<Enemy>()?.TakeDamage(10);
             }
-        }
+        }*/
     }
 
 }
