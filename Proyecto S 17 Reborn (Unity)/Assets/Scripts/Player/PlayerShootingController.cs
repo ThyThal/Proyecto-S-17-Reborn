@@ -133,10 +133,14 @@ public class PlayerShootingController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Punch");
         _starterAssetsInputs.DisablePlayerActions();
 
-        var enemies = Physics.OverlapSphere(transform.position, 10f, _enemyLayers);
+        var enemies = Physics.OverlapSphere(transform.position, 10f);
         foreach (var item in enemies)
         {
-            Debug.Log("aaa");
+            if (item.gameObject.layer == _enemyLayers)
+            {
+                Debug.Log("AAAA");
+                item.GetComponent<Enemy>()?.TakeDamage(10);
+            }
         }
     }
 
