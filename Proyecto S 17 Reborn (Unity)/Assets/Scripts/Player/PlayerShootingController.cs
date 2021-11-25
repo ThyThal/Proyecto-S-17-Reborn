@@ -9,6 +9,7 @@ using IndieMarc.EnemyVision;
 
 public class PlayerShootingController : MonoBehaviour
 {
+    [SerializeField] private Battery _battery;
     [SerializeField] private GameObject _currentAimObject;
     [SerializeField] private CinemachineVirtualCamera _normalCamera;
     [SerializeField] private CinemachineVirtualCamera _aimingCamera;
@@ -39,6 +40,7 @@ public class PlayerShootingController : MonoBehaviour
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _thirdPersonController = GetComponent<ThirdPersonController>();
+        _battery = GetComponent<Battery>();
         _breakableLayers = LayerMask.NameToLayer("Breakable Object");
         _enemyLayers = LayerMask.NameToLayer("Enemy");
 
@@ -46,6 +48,11 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Update()
     {
+        if (_battery.CurrentBattery <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
+
         if (_starterAssetsInputs.attacking)
         {
             Attack();
@@ -84,7 +91,7 @@ public class PlayerShootingController : MonoBehaviour
                 {
                     var currentSelectedObject = _currentAimObject.GetComponent<BreakableObject>();
 
-                    if (_currentBreakableObject == null)
+                    if (_currentBreakableObject == null && _playerSpellMeter.CanUseSpell)
                     {
                         currentSelectedObject.SelectObject();
                         _currentBreakableObject = currentSelectedObject;
@@ -92,7 +99,7 @@ public class PlayerShootingController : MonoBehaviour
 
                     else
                     {
-                        if (currentSelectedObject != _currentBreakableObject)
+                        if (currentSelectedObject != _currentBreakableObject && _playerSpellMeter.CanUseSpell)
                         {
                             _currentBreakableObject.UnselectObject();
                             currentSelectedObject.SelectObject(); // Highlight.
@@ -134,11 +141,10 @@ public class PlayerShootingController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Punch");
         _starterAssetsInputs.DisablePlayerActions();
 
-        var enemies = Physics.OverlapSphere(transform.position, 1.5f);
+        var enemies = Physics.OverlapSphere(transform.position, 2f);
         var enemy = enemies.FirstOrDefault(x => x.gameObject.layer == _enemyLayers);
         if (enemy != null) {
-            Debug.Log("dsafasfsa");
-            enemy.gameObject.GetComponent<Enemy>()?.TakeDamage(10);
+            enemy.gameObject.GetComponent<Enemy>()?.TakeDamage(5);
         };
 
         /*

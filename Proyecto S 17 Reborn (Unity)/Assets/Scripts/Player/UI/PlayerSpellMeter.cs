@@ -14,6 +14,8 @@ public class PlayerSpellMeter : MonoBehaviour
     [SerializeField] private Image _mask;
     [SerializeField] private Slider _slider;
     [SerializeField] private Color _color;
+    [SerializeField] private Gradient _gradient;
+    [SerializeField] private bool isGradient = false;
 
     public int Current
     {
@@ -37,5 +39,10 @@ public class PlayerSpellMeter : MonoBehaviour
         float maximumOffset = _maximum - _minimum;
         float fillAmount = currentOffset / maximumOffset;
         _slider.value = fillAmount;
+
+        if (isGradient)
+        {
+            _mask.color = _gradient.Evaluate(_slider.value);
+        }
     }
 }

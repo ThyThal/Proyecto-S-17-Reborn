@@ -31,6 +31,12 @@ namespace IndieMarc.EnemyVision
     [RequireComponent(typeof(Rigidbody))]
     public class Enemy : MonoBehaviour
     {
+        [Header("Current Debug")]
+        [SerializeField] private Transform _currentDebugWaypoint;
+        [SerializeField] private float _currentDebugTimer;
+        [SerializeField] private GameObject _firstWaypoint;
+
+        [Header("Basura")]
         [SerializeField] private HealthBar healthBar;
         [SerializeField] private float _maxLife = 100f;
         [SerializeField] private float _currentHealth;
@@ -78,7 +84,7 @@ namespace IndieMarc.EnemyVision
         private Vector3 current_move;
         private Vector3 current_rot_target;
         private float current_rot_mult = 1f;
-        private bool waiting = false;
+        [SerializeField] private bool waiting = false;
         private float wait_timer = 0f;
 
         private int current_path = 0;
@@ -89,7 +95,7 @@ namespace IndieMarc.EnemyVision
         private GameObject last_target;
         private float memory_timer = 0f;
 
-        private List<Vector3> path_list = new List<Vector3>();
+        [SerializeField] private List<Vector3> path_list = new List<Vector3>();
 
         private static List<Enemy> enemy_list = new List<Enemy>();
 
@@ -107,8 +113,12 @@ namespace IndieMarc.EnemyVision
             current_speed = move_speed;
             rotate_val = 0f;
 
-            if (type != EnemyPatrolType.FacingOnly)
-                path_list.Add(transform.position);
+            if (type != EnemyPatrolType.FacingOnly && _firstWaypoint != null)
+            {
+                //path_list.Add(transform.position);
+                _firstWaypoint.transform.position = transform.position;
+                path_list.Add(_firstWaypoint.transform.position);
+            }
 
             foreach (GameObject patrol in patrol_path)
             {
@@ -167,6 +177,8 @@ namespace IndieMarc.EnemyVision
 
         private void Update()
         {
+            _currentDebugTimer = wait_timer;
+
             if (paused)
                 return;
 
@@ -268,11 +280,13 @@ namespace IndieMarc.EnemyVision
                 //Check if reached target
                 Vector3 dist_vect = (targ - transform.position);
                 dist_vect.y = 0f;
+
+                /*
                 if (dist_vect.magnitude < 0.1f)
                 {
                     waiting = true;
                     wait_timer = 0f;
-                }
+                }*/
 
                 //Check if obstacle ahead
                 bool fronted = CheckFronted(dist_vect.normalized);
@@ -282,7 +296,7 @@ namespace IndieMarc.EnemyVision
                     wait_timer = 0f;
                 }
             }
-
+            
             //Waiting
             if (waiting)
             {
@@ -600,6 +614,12 @@ namespace IndieMarc.EnemyVision
                 {
                     Die();
                 }
+            }
+
+            if (other.CompareTag("Waypoint"))
+            {
+                waiting = true;
+                wait_timer = 0f;
             }
         }
 

@@ -114,6 +114,8 @@ namespace StarterAssets
 
 		private void Awake()
 		{
+			GameManager.Instance.LoadPlayer(this);
+
 			// get a reference to our main camera
 			if (_mainCamera == null)
 			{

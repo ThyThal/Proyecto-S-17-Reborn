@@ -30,4 +30,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
         Debug.Log("Game Over!");
     }
+
+    public void LoadPlayer(ThirdPersonController player)
+    {
+        _thirdPersonController = player;
+    }
 }
