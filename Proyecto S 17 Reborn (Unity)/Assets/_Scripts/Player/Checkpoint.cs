@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    [SerializeField] private bool win;
+    [SerializeField] private bool newLevel;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (win)
+            if (newLevel)
             {
-                GameManager.Instance.Win();
+                GameManager.Instance.NewLevel();
             }
 
             else
             {
-                GameManager.Instance.GameOver();
+                GameManager.Instance.Win();
             }
         }
     }

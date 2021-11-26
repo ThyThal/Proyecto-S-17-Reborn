@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private ThirdPersonController _thirdPersonController;
     private float _batteryAmount = 1000f;
-    private int _spellAmount;
+    private int _spellAmount = 0;
     public ThirdPersonController Player => _thirdPersonController;
 
     #region // Singleton Instance
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this);
         }
 
         else
@@ -47,6 +48,14 @@ public class GameManager : MonoBehaviour
     public void LoadPlayerData()
     {
         _thirdPersonController.GetComponent<Battery>().OverrideBattery(_batteryAmount);
-        _thirdPersonController.GetComponent<PlayerSpellMeter>().Current = _spellAmount;
+        _thirdPersonController.GetComponent<PlayerShootingController>().PlayerSpellMeter.Current = _spellAmount;
+    }
+
+    public void NewLevel()
+    {
+        SceneManager.LoadScene(2);
+        _batteryAmount = _thirdPersonController.GetComponent<Battery>().CurrentBattery;
+        _spellAmount = _thirdPersonController.GetComponent<PlayerShootingController>().PlayerSpellMeter.Current;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

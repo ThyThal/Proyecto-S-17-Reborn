@@ -50,7 +50,16 @@ public class Battery : MonoBehaviour
 
     public void HealBattery(float amount)
     {
-        _currentBattery += amount;
+        if ((_currentBattery + amount) >= _maximumBattery)
+        {
+            _currentBattery = _maximumBattery;
+        }
+
+        else
+        {
+            _currentBattery += amount;
+        }
+
         UpdateFill();
     }
 

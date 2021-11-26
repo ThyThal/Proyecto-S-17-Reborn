@@ -34,6 +34,7 @@ public class PlayerShootingController : MonoBehaviour
 
     public BreakableObject CurrentBreakableObject => _currentBreakableObject;
     public Enemy CurrentEnemy => _currentEnemy;
+    public PlayerSpellMeter PlayerSpellMeter => _playerSpellMeter;
     public Transform AimingPoint => _aimingPoint.transform;
 
     private void Awake()
