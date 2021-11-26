@@ -114,7 +114,8 @@ namespace StarterAssets
 
 		private void Awake()
 		{
-			GameManager.Instance.LoadPlayer(this);
+			if (GameManager.Instance != null)
+				GameManager.Instance.LoadPlayer(this);
 
 			// get a reference to our main camera
 			if (_mainCamera == null)
@@ -128,6 +129,7 @@ namespace StarterAssets
 			_hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
+			GameManager.Instance.LoadPlayerData();
 
 			AssignAnimationIDs();
 

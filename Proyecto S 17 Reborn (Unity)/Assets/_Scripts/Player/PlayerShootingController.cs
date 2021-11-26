@@ -48,11 +48,6 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Update()
     {
-        if (_battery.CurrentBattery <= 0)
-        {
-            GameManager.Instance.GameOver();
-        }
-
         if (_starterAssetsInputs.attacking)
         {
             Attack();
@@ -136,8 +131,7 @@ public class PlayerShootingController : MonoBehaviour
         transform.rotation = newRotation;
 
         //Debug.Log("[Attack] Use Attack");
-        int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
-        _playerSpellMeter.Current += spellRecoverAmount;
+        
         GetComponent<Animator>().SetTrigger("Punch");
         _starterAssetsInputs.DisablePlayerActions();
 
@@ -145,6 +139,10 @@ public class PlayerShootingController : MonoBehaviour
         var enemy = enemies.FirstOrDefault(x => x.gameObject.layer == _enemyLayers);
         if (enemy != null) {
             enemy.gameObject.GetComponent<Enemy>()?.TakeDamage(5);
+
+            int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
+            _playerSpellMeter.Current += spellRecoverAmount;
+            _battery.HealBattery(75f);
         };
 
         /*

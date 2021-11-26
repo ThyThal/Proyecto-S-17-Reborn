@@ -282,8 +282,8 @@ namespace IndieMarc.EnemyVision
                     else
                     {
                         character.GetComponent<Battery>().DamageBattery(250f);
-                        Stop();
                         attacked = true;
+                        Stop();
                     }
                 }
             }
@@ -505,11 +505,6 @@ namespace IndieMarc.EnemyVision
         public static List<EnemyVision> GetAll()
         {
             return enemy_list;
-        }
-
-        public void GameOver()
-        {
-            GameManager.Instance.GameOver();
         }
     }
 

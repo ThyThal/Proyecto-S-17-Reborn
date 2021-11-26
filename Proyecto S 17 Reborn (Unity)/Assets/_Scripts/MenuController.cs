@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(1);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Quit()
@@ -17,5 +18,11 @@ public class MenuController : MonoBehaviour
         #else
         Application.Quit ();
         #endif
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+        Cursor.lockState = CursorLockMode.None;
     }
 }

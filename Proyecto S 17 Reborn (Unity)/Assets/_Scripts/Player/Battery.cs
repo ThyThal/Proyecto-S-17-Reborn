@@ -22,6 +22,11 @@ public class Battery : MonoBehaviour
 
     private void Update()
     {
+        if (CurrentBattery <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
+
         if (_currentBattery > 0)
         {
             var batteryUsage = _usageBattery * _usageMultiplier;
@@ -40,6 +45,18 @@ public class Battery : MonoBehaviour
     public void DamageBattery(float amount)
     {
         _currentBattery -= amount;
+        UpdateFill();
+    }
+
+    public void HealBattery(float amount)
+    {
+        _currentBattery += amount;
+        UpdateFill();
+    }
+
+    public void OverrideBattery(float amount)
+    {
+        _currentBattery = amount;
         UpdateFill();
     }
 }
