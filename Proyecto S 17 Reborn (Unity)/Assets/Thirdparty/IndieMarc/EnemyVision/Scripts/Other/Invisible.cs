@@ -10,11 +10,23 @@ namespace IndieMarc.EnemyVision
     
     public class Invisible : MonoBehaviour
     {
-        void Start()
+        [SerializeField] private SphereCollider _sphere;
+
+        private void Awake()
         {
             MeshRenderer mesh = GetComponentInChildren<MeshRenderer>();
-            if(mesh != null)
+            _sphere = GetComponent<SphereCollider>();
+            if (mesh != null)
                 mesh.enabled = false;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy") && _sphere != null)
+            {
+                _sphere.enabled = true;
+            }
+
         }
 
     }

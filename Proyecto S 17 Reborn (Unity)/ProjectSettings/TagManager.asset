@@ -7,6 +7,10 @@ TagManager:
   - CinemachineTarget
   - Enemy
   - Solid
+  - Shield
+  - Checkpoint
+  - Waypoint
+  - Forcefield
   layers:
   - Default
   - TransparentFX
@@ -17,11 +21,11 @@ TagManager:
   - Breakable Object
   - Solid
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Walkable
+  - Player
+  - Shield
+  - Checkpoint
+  - Waypoint
   - 
   - 
   - 

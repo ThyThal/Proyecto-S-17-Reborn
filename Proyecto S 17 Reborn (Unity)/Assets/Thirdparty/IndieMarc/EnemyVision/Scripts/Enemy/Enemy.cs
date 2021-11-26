@@ -31,6 +31,12 @@ namespace IndieMarc.EnemyVision
     [RequireComponent(typeof(Rigidbody))]
     public class Enemy : MonoBehaviour
     {
+        [Header("Current Debug")]
+        [SerializeField] private Transform _currentDebugWaypoint;
+        [SerializeField] private float _currentDebugTimer;
+        [SerializeField] private GameObject _firstWaypoint;
+
+        [Header("Basura")]
         [SerializeField] private HealthBar healthBar;
         [SerializeField] private float _maxLife = 100f;
         [SerializeField] private float _currentHealth;
@@ -78,7 +84,7 @@ namespace IndieMarc.EnemyVision
         private Vector3 current_move;
         private Vector3 current_rot_target;
         private float current_rot_mult = 1f;
-        private bool waiting = false;
+        [SerializeField] private bool waiting = false;
         private float wait_timer = 0f;
 
         private int current_path = 0;
@@ -89,7 +95,7 @@ namespace IndieMarc.EnemyVision
         private GameObject last_target;
         private float memory_timer = 0f;
 
-        private List<Vector3> path_list = new List<Vector3>();
+        [SerializeField] private List<Vector3> path_list = new List<Vector3>();
 
         private static List<Enemy> enemy_list = new List<Enemy>();
 
@@ -107,8 +113,12 @@ namespace IndieMarc.EnemyVision
             current_speed = move_speed;
             rotate_val = 0f;
 
-            if (type != EnemyPatrolType.FacingOnly)
-                path_list.Add(transform.position);
+            if (type != EnemyPatrolType.FacingOnly && _firstWaypoint != null)
+            {
+                //path_list.Add(transform.position);
+                _firstWaypoint.transform.position = transform.position;
+                path_list.Add(_firstWaypoint.transform.position);
+            }
 
             foreach (GameObject patrol in patrol_path)
             {
@@ -167,6 +177,8 @@ namespace IndieMarc.EnemyVision
 
         private void Update()
         {
+            _currentDebugTimer = wait_timer;
+
             if (paused)
                 return;
 
@@ -223,7 +235,6 @@ namespace IndieMarc.EnemyVision
                 MoveTo(alert_target, move_speed);
             }
         }
-
         private void UpdateConfused()
         {
             if (wait_timer > alert_wait_time)
@@ -234,7 +245,6 @@ namespace IndieMarc.EnemyVision
                 MoveTo(alert_target);
             }
         }
-
         private void UpdatePatrol()
         {
             bool facing_only = type == EnemyPatrolType.FacingOnly;
@@ -270,11 +280,13 @@ namespace IndieMarc.EnemyVision
                 //Check if reached target
                 Vector3 dist_vect = (targ - transform.position);
                 dist_vect.y = 0f;
+
+                /*
                 if (dist_vect.magnitude < 0.1f)
                 {
                     waiting = true;
                     wait_timer = 0f;
-                }
+                }*/
 
                 //Check if obstacle ahead
                 bool fronted = CheckFronted(dist_vect.normalized);
@@ -284,7 +296,7 @@ namespace IndieMarc.EnemyVision
                     wait_timer = 0f;
                 }
             }
-
+            
             //Waiting
             if (waiting)
             {
@@ -297,7 +309,6 @@ namespace IndieMarc.EnemyVision
                 }
             }
         }
-
         private void UpdateFollow()
         {
             Vector3 targ = follow_target ? follow_target.transform.position : last_seen_pos;
@@ -326,7 +337,6 @@ namespace IndieMarc.EnemyVision
         }
 
         //---- Patrol -----
-
         private void RewindPath()
         {
             if (type != EnemyPatrolType.FacingOnly)
@@ -336,7 +346,6 @@ namespace IndieMarc.EnemyVision
                 current_path = Mathf.Clamp(current_path, 0, path_list.Count - 1);
             }
         }
-
         private void GoToNextPath()
         {
             if (type == EnemyPatrolType.FacingOnly)
@@ -361,12 +370,10 @@ namespace IndieMarc.EnemyVision
         }
 
         //---- Chase -----
-
         public void SetAlertTarget(Vector3 pos)
         {
             alert_target = pos;
         }
-
         public void SetFollowTarget(GameObject atarget)
         {
             follow_target = atarget;
@@ -388,27 +395,23 @@ namespace IndieMarc.EnemyVision
                 StopMove();
             }
         }
-
         public void Follow(GameObject target)
         {
             ChangeState(EnemyState.Chase);
             SetFollowTarget(target);
             using_navmesh = true;
         }
-
         public void MoveTo(Vector3 pos, float speed = 1f)
         {
             move_target = pos;
             current_speed = speed;
             using_navmesh = true;
         }
-
         public void FaceToward(Vector3 pos, float speed_mult = 1f)
         {
             current_rot_target = pos;
             current_rot_mult = speed_mult;
         }
-
         public void StopMove()
         {
             using_navmesh = false;
@@ -418,7 +421,6 @@ namespace IndieMarc.EnemyVision
             if (nav_agent && nav_agent.enabled)
                 nav_agent.ResetPath(); //Cancel previous path
         }
-
         public void Kill()
         {
             if (onDeath != null)
@@ -426,7 +428,6 @@ namespace IndieMarc.EnemyVision
 
             Destroy(gameObject);
         }
-
         public void ChangeState(EnemyState state)
         {
             this.state = state;
@@ -434,19 +435,16 @@ namespace IndieMarc.EnemyVision
             wait_timer = 0f;
             waiting = false;
         }
-
         public void Pause()
         {
             paused = true;
         }
-
         public void UnPause()
         {
             paused = false;
         }
 
         //---- Check state -----
-
         public bool CheckFronted(Vector3 dir)
         {
             Vector3 origin = transform.position + Vector3.up * 1f;
@@ -454,14 +452,12 @@ namespace IndieMarc.EnemyVision
             bool success = Physics.Raycast(new Ray(origin, dir.normalized), out hit, dir.magnitude, obstacle_mask.value);
             return success && (follow_target == null || !hit.collider.transform.IsChildOf(follow_target.transform));
         }
-
         public bool CheckGrounded(Vector3 dir)
         {
             Vector3 origin = transform.position + Vector3.up * 0.1f;
             RaycastHit hit;
             return Physics.Raycast(new Ray(origin, dir.normalized), out hit, dir.magnitude, obstacle_mask.value);
         }
-
         private void CheckIfFacingReachedTarget(Vector3 targ)
         {
             //Check if reached target
@@ -476,7 +472,6 @@ namespace IndieMarc.EnemyVision
         }
 
         //---- Getters ------
-
         public bool HasReachedTarget()
         {
             Vector3 targ = follow_target ? follow_target.transform.position : last_seen_pos;
@@ -484,7 +479,6 @@ namespace IndieMarc.EnemyVision
                 targ = alert_target;
             return (targ - transform.position).magnitude < 0.5f;
         }
-
         private Vector3 GetRandomLookTarget()
         {
             Vector3 center = transform.position;
@@ -492,49 +486,40 @@ namespace IndieMarc.EnemyVision
             Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
             return center + offset;
         }
-
         public EnemyState GetState()
         {
             return state;
         }
-
         public float GetStateTimer()
         {
             return state_timer;
         }
-
         public Vector3 GetMove()
         {
             return move_vect;
         }
-
         public Vector3 GetFacing()
         {
             return face_vect;
         }
-
         public float GetRotationVelocity()
         {
             return rotate_val;
         }
-
         public bool IsRunning()
         {
             return state == EnemyState.Chase;
         }
-
         public Vector3 GetNextTarget()
         {
             if (use_pathfind && nav_agent && nav_agent.enabled && using_navmesh && nav_agent.hasPath)
                 return nav_agent.nextPosition;
             return move_target;
         }
-
         public bool IsPaused()
         {
             return paused;
         }
-
         public static Enemy GetNearest(Vector3 pos, float range = 999f)
         {
             float min_dist = range;
@@ -550,7 +535,6 @@ namespace IndieMarc.EnemyVision
             }
             return nearest;
         }
-
         public static List<Enemy> GetAllInRange(Vector3 pos, float range)
         {
             List<Enemy> range_list = new List<Enemy>();
@@ -564,7 +548,6 @@ namespace IndieMarc.EnemyVision
             }
             return range_list;
         }
-
         public static List<Enemy> GetAll()
         {
             return enemy_list;
@@ -631,6 +614,12 @@ namespace IndieMarc.EnemyVision
                 {
                     Die();
                 }
+            }
+
+            if (other.CompareTag("Waypoint"))
+            {
+                waiting = true;
+                wait_timer = 0f;
             }
         }
 

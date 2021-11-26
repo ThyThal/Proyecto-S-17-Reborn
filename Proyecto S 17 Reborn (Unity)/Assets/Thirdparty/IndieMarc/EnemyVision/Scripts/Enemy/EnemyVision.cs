@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using StarterAssets;
 
 namespace IndieMarc.EnemyVision
 {
@@ -11,6 +12,8 @@ namespace IndieMarc.EnemyVision
 
     public class EnemyVision : MonoBehaviour
     {
+        [SerializeField] private bool attacked = false;
+
         [Header("Detection")]
         public float vision_angle = 30f;
         public float vision_range = 10f;
@@ -50,6 +53,12 @@ namespace IndieMarc.EnemyVision
         private float wait_timer = 0f;
 
         private static List<EnemyVision> enemy_list = new List<EnemyVision>();
+
+
+
+
+
+
 
         private void Awake()
         {
@@ -259,12 +268,22 @@ namespace IndieMarc.EnemyVision
             //Detect character touch
             foreach (VisionTarget character in VisionTarget.GetAll())
             {
-                if (CanTouchObject(character.gameObject))
+                if (CanTouchObject(character.gameObject) && !attacked)
                 {
                     if (onTouchTarget != null)
-                    {
                         onTouchTarget.Invoke(character);
-                        GameOver();
+
+                    var playerController = character.GetComponent<ThirdPersonController>();
+                    if (playerController != null && playerController.IsProtected)
+                    {
+                        GetComponent<Enemy>().Die();
+                    }
+
+                    else
+                    {
+                        character.GetComponent<Battery>().DamageBattery(250f);
+                        attacked = true;
+                        Stop();
                     }
                 }
             }
@@ -401,6 +420,7 @@ namespace IndieMarc.EnemyVision
         {
             ResumeDefault();
             WaitFor(2f);
+            attacked = false;
         }
 
         public void ResumeDefault()
@@ -485,11 +505,6 @@ namespace IndieMarc.EnemyVision
         public static List<EnemyVision> GetAll()
         {
             return enemy_list;
-        }
-
-        public void GameOver()
-        {
-            GameManager.Instance.GameOver();
         }
     }
 
