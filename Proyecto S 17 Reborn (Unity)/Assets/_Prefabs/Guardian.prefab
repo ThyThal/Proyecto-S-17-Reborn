@@ -342,12 +342,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6611e123aa8f2a544910b7004df7ecf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentDebugWaypoint: {fileID: 0}
+  _currentDebugTimer: 0
+  _firstWaypoint: {fileID: 0}
   healthBar: {fileID: 2301662571846700997}
   _maxLife: 100
   _currentHealth: 0
   move_speed: 2
   run_speed: 4
-  rotate_speed: 120
+  rotate_speed: 180
   fall_speed: 5
   obstacle_mask:
     serializedVersion: 2
@@ -362,6 +365,8 @@ MonoBehaviour:
   alert_walk_time: 10
   follow_target: {fileID: 0}
   memory_duration: 4
+  waiting: 0
+  path_list: []
 --- !u!114 &5779988416759377081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f2d63352d3cc446b192c9fe08c735e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attacked: 0
   vision_angle: 45
   vision_range: 10
   vision_near_range: 5
