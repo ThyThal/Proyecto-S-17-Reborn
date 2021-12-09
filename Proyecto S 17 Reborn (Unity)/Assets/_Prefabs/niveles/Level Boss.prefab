@@ -2678,7 +2678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 921671853888927085}
   m_Layer: 7
-  m_Name: Nivel 1
+  m_Name: Level Boss
   m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
