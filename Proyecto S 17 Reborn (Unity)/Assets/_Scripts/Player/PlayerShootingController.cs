@@ -16,6 +16,7 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private LayerMask _aimingLayers;
     [SerializeField] private int _breakableLayers;
     [SerializeField] private int _enemyLayers;
+    [SerializeField] private int _batteryLayers;
 
     [SerializeField] private GameObject _aimingPoint;
 
@@ -44,6 +45,7 @@ public class PlayerShootingController : MonoBehaviour
         _battery = GetComponent<Battery>();
         _breakableLayers = LayerMask.NameToLayer("Breakable Object");
         _enemyLayers = LayerMask.NameToLayer("Enemy");
+        _batteryLayers = LayerMask.NameToLayer("Boss Battery");
 
     }
 
@@ -138,23 +140,24 @@ public class PlayerShootingController : MonoBehaviour
 
         var enemies = Physics.OverlapSphere(transform.position, 2f);
         var enemy = enemies.FirstOrDefault(x => x.gameObject.layer == _enemyLayers);
-        if (enemy != null) {
+        if (enemy != null) 
+        {
             enemy.gameObject.GetComponent<Enemy>()?.TakeDamage(5);
 
             int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
             _playerSpellMeter.Current += spellRecoverAmount;
             _battery.HealBattery(75f);
-        };
+        }
 
-        /*
-        foreach (var item in enemies)
+        var batteries = Physics.OverlapSphere(transform.position, 2f);
+        var battery = batteries.FirstOrDefault(x => x.gameObject.layer == _batteryLayers);
+        if (battery != null)
         {
-            if (item.gameObject.layer == _enemyLayers)
-            {
-                Debug.Log("AAAA");
-                item.GetComponent<Enemy>()?.TakeDamage(10);
-            }
-        }*/
-    }
+            battery.gameObject.GetComponent<BossBattery>()?.TakeDamage(5);
 
+            int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
+            _playerSpellMeter.Current += spellRecoverAmount;
+            _battery.HealBattery(25f);
+        }
+    }
 }
