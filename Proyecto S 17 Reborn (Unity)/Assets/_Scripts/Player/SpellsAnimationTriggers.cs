@@ -10,5 +10,13 @@ public class SpellsAnimationTriggers : MonoBehaviour
     public void OnSpellFinished()
     {
         assetsInputs.FinishedCastingSpell();
+        assetsInputs.attacking = false;
+        playerShooting.castedAttack = false;
+
+    }
+
+    public void OnSpellStarted()
+    {
+        playerShooting.castedAttack = true;
     }
 }

@@ -34,6 +34,8 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private int _spellRecoverMinimum = 20;
     [SerializeField] private int _spellRecoverMaximum = 40;
 
+    public bool castedAttack = false;
+
     public BreakableObject CurrentBreakableObject => _currentBreakableObject;
     public Enemy CurrentEnemy => _currentEnemy;
     public PlayerSpellMeter PlayerSpellMeter => _playerSpellMeter;
@@ -53,10 +55,9 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Update()
     {
-        if (_starterAssetsInputs.attacking)
+        if (_starterAssetsInputs.attacking && !castedAttack)
         {
             Attack();
-            _starterAssetsInputs.attacking = false;
         }
 
         if (_starterAssetsInputs.aim)
@@ -129,15 +130,18 @@ public class PlayerShootingController : MonoBehaviour
 
     private void Attack()
     {
+        castedAttack = true;
         transform.LookAt(AimingPoint.transform);
         var newRotation = transform.rotation;
         newRotation.x = 0;
         newRotation.z = 0;
         transform.rotation = newRotation;
-
-        //Debug.Log("[Attack] Use Attack");
         
-        GetComponent<Animator>().SetTrigger("Punch");
+        if (castedAttack)
+        {
+            GetComponent<Animator>().SetTrigger("Punch");
+        }
+
         _starterAssetsInputs.DisablePlayerActions();
 
         var enemies = Physics.OverlapSphere(transform.position, 2f);
