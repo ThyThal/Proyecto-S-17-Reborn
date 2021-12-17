@@ -7,6 +7,8 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Material _selectedMaterial;
+    [SerializeField] private BossBattery bossBattery;
+    [SerializeField] private bool isBattery = false;
 
     private bool _isSelected = false;
 
@@ -36,6 +38,11 @@ public class BreakableObject : MonoBehaviour
 
     public void DestroyObject()
     {
+        if (isBattery == true)
+        {
+            bossBattery.Die();
+        }
+
         Destroy(this.gameObject);
     }
 }

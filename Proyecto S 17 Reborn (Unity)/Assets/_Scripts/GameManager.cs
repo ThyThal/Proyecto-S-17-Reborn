@@ -30,13 +30,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void Win()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
         _thirdPersonController.GetComponent<PlayerShootingController>().PlayerSpellMeter.Current = _spellAmount;
     }
 
-    public void NewLevel()
+    public void NewLevel(int index)
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(index);
         _batteryAmount = _thirdPersonController.GetComponent<Battery>().CurrentBattery;
         _spellAmount = _thirdPersonController.GetComponent<PlayerShootingController>().PlayerSpellMeter.Current;
         Cursor.lockState = CursorLockMode.Locked;

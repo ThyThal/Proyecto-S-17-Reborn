@@ -8,6 +8,8 @@ public class BossBattery : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private float _maxLife = 100f;
     [SerializeField] private float _currentHealth;
+    [SerializeField] private bool _mainBattery = false;
+    [SerializeField] private BossManager _bossManager;
     public float CurrentHealth => _currentHealth;
 
     // DAMAGE
@@ -26,5 +28,10 @@ public class BossBattery : MonoBehaviour
     {
         healthBar.gameObject.SetActive(false);
         gameObject.SetActive(false);
+
+        if (_mainBattery == true)
+        {
+            _bossManager.DeactivateDefense();
+        }
     }
 }

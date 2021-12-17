@@ -17,9 +17,17 @@ public class SpellBlast : MonoBehaviour
             {
                 if (collider.gameObject.CompareTag("Enemy"))
                 {
-                    Debug.Log("Enemy");
                     Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-                    enemy.TakeDamage(50f);
+                    if (enemy != null)
+                    {
+                        enemy.TakeDamage(50f);
+                    }
+
+                    BossTurret boss = collider.gameObject.GetComponent<BossTurret>();
+                    if (boss != null)
+                    {
+                        boss.TakeDamage(50f);
+                    }
                 }
             }
         }

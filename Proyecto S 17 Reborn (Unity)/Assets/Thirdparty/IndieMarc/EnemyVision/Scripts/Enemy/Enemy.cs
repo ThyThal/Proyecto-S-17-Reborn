@@ -140,6 +140,7 @@ namespace IndieMarc.EnemyVision
         {
             healthBar.SetMaxHealth((int)_maxLife);
             Heal(_maxLife);
+            healthBar.UpdateColor();
         }
 
         private void FixedUpdate()

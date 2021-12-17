@@ -295,6 +295,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!4 &112004841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5462716674324387885, guid: 5149e0b425ffd2f45b7ae0c0ca9073cb, type: 3}
@@ -781,6 +783,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!4 &266597490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
@@ -1317,6 +1321,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &611602617 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8478777946881199242, guid: 6a2e43f40370fcd45b57546335b05b1b, type: 3}
@@ -2023,6 +2029,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &695427195
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,6 +2576,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &834994748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,6 +2673,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &836459025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,6 +2708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newLevel: 1
+  levelIndex: 0
 --- !u!135 &836459027
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3432,6 +3445,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &891298476 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6947449405330383281, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
@@ -3452,6 +3467,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &970021916
 GameObject:
   m_ObjectHideFlags: 0
@@ -5765,6 +5782,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1264935134
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,6 +5838,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1289275986
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,6 +5873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newLevel: 0
+  levelIndex: 0
 --- !u!135 &1289275988
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6058,6 +6080,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1320941931
 GameObject:
   m_ObjectHideFlags: 0
@@ -7032,6 +7056,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1368872070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8478777946881199242, guid: 6a2e43f40370fcd45b57546335b05b1b, type: 3}
@@ -7697,6 +7723,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1533993443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2742374090662089873, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
@@ -7717,6 +7745,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1563811205
 GameObject:
   m_ObjectHideFlags: 0
@@ -7907,6 +7937,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1601652634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3297709168547847191, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
@@ -7927,6 +7959,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1638953554
 GameObject:
   m_ObjectHideFlags: 0
@@ -8041,6 +8075,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1001 &1654947295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8221,6 +8257,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0
@@ -8315,6 +8353,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1782118086
 GameObject:
   m_ObjectHideFlags: 0
@@ -8626,6 +8666,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1817886124
 GameObject:
   m_ObjectHideFlags: 0
@@ -8722,6 +8764,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!4 &1851746164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5886732218674273757, guid: cf3bf0a9dc2a5e04ebe77cdfc769fd7f, type: 3}
@@ -8932,6 +8976,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &1937720956
 GameObject:
   m_ObjectHideFlags: 0
@@ -9143,6 +9189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newLevel: 1
+  levelIndex: 2
 --- !u!135 &2030389799
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10008,6 +10055,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 0}
   _defaultMaterial: {fileID: 0}
   _selectedMaterial: {fileID: 2100000, guid: ecc60ada11105ad4882a4b4d84b028d5, type: 2}
+  bossBattery: {fileID: 0}
+  isBattery: 0
 --- !u!1 &2096972568 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8478777946881199242, guid: 6a2e43f40370fcd45b57546335b05b1b, type: 3}

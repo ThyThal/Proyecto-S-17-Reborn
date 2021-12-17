@@ -15,6 +15,7 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _aimingCamera;
     [SerializeField] private LayerMask _aimingLayers;
     [SerializeField] private int _breakableLayers;
+    [SerializeField] private int _breakableLayersBoss;
     [SerializeField] private int _enemyLayers;
     [SerializeField] private int _batteryLayers;
 
@@ -46,6 +47,7 @@ public class PlayerShootingController : MonoBehaviour
         _breakableLayers = LayerMask.NameToLayer("Breakable Object");
         _enemyLayers = LayerMask.NameToLayer("Enemy");
         _batteryLayers = LayerMask.NameToLayer("Boss Battery");
+        _breakableLayersBoss = LayerMask.NameToLayer("Breakble Boss Battery");
 
     }
 
@@ -85,7 +87,7 @@ public class PlayerShootingController : MonoBehaviour
             _aimingPoint.transform.position = raycastHit.point;
             if (_starterAssetsInputs.aim == true)
             {
-                if (_currentAimObject.layer == _breakableLayers)
+                if (_currentAimObject.layer == _breakableLayers || _currentAimObject.layer == _breakableLayersBoss)
                 {
                     var currentSelectedObject = _currentAimObject.GetComponent<BreakableObject>();
 
@@ -158,6 +160,17 @@ public class PlayerShootingController : MonoBehaviour
             int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
             _playerSpellMeter.Current += spellRecoverAmount;
             _battery.HealBattery(25f);
+        }
+
+        var bossBatts = Physics.OverlapSphere(transform.position, 2f);
+        var bossBat = batteries.FirstOrDefault(x => x.gameObject.layer == _breakableLayersBoss);
+        if (bossBat != null)
+        {
+            bossBat.gameObject.GetComponent<BossBattery>()?.TakeDamage(5);
+
+            int spellRecoverAmount = Random.Range(_spellRecoverMinimum, _spellRecoverMaximum);
+            _playerSpellMeter.Current += spellRecoverAmount;
+            _battery.HealBattery(5f);
         }
     }
 }

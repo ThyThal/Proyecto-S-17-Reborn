@@ -5,14 +5,15 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] private bool newLevel;
+    [SerializeField] private int levelIndex;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (newLevel)
-            {
-                GameManager.Instance.NewLevel();
+            if (newLevel == true)
+            {               
+                GameManager.Instance.NewLevel(levelIndex);
             }
 
             else
