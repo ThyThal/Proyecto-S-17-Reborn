@@ -24,7 +24,7 @@ public class SpellBlast : MonoBehaviour
                     }
 
                     BossTurret boss = collider.gameObject.GetComponent<BossTurret>();
-                    if (boss != null)
+                    if (boss != null && boss.isWeak)
                     {
                         boss.TakeDamage(50f);
                     }

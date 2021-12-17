@@ -15,6 +15,8 @@ public class BossTurret : MonoBehaviour
     [SerializeField] private float _currentHealth;
     public float CurrentHealth => _currentHealth;
 
+    public bool isWeak = false;
+
     // DAMAGE
     public virtual void TakeDamage(float damage)
     {

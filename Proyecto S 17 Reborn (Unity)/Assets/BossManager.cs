@@ -15,11 +15,13 @@ public class BossManager : MonoBehaviour
 
     public void DeactivateDefense()
     {
+        _turret.isWeak = true;
         _bossDefense.SetActive(false);
     }
 
     public void ActivateDefense()
     {
+        _turret.isWeak = false;
         _bossDefense.SetActive(true);
     }
 
