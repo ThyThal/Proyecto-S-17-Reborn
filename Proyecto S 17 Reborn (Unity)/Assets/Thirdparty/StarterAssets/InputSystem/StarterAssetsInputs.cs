@@ -21,7 +21,7 @@ namespace StarterAssets
 		public bool useSpellUtility;
 		public bool useSpellDefensive;
 		public bool useSpellOffensive;
-		public bool attacking;
+		[SerializeField] public bool attacking;
 		public bool cancelSpell;
 
 		[Header("Movement Settings")]

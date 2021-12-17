@@ -9,6 +9,7 @@ public class Recharge : MonoBehaviour
     [SerializeField] private Material _usedColor;
     [SerializeField] private Material _normalColor;
 
+    private StarterAssetsInputs _playerInputs;
     [SerializeField] private bool _used = false;
 
 
@@ -19,6 +20,7 @@ public class Recharge : MonoBehaviour
             if (other.CompareTag("Player") && _player == null)
             {
                 _player = other.GetComponent<PlayerShootingController>();
+                _playerInputs = _player.GetComponent<StarterAssetsInputs>();
             }
         }
     }
@@ -38,9 +40,15 @@ public class Recharge : MonoBehaviour
     {
         if (_used == false && _player != null)
         {
-            if (_player.GetComponent<StarterAssetsInputs>().attacking == true)
+            if (_playerInputs.attacking)
             {
+                Debug.Log("Used");
                 Use();
+            }
+
+            else
+            {
+                Debug.Log("Waiting...");
             }
         }
     }
